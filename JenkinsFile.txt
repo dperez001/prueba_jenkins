@@ -1,0 +1,51 @@
+pipeline {
+    agent any
+
+    stages {
+
+        stage('Stage 1 - Saludo') {
+            steps {
+                echo "Hola mundo"
+            }
+        }
+
+        stage('Stage 2 - Variable y mensaje') {
+            steps {
+                script {
+                    def miNombre = "David Pérez"
+                    echo "La variable miNombre contiene: ${miNombre}"
+                }
+            }
+        }
+
+        stage('Stage 3 - Suma de dos números') {
+            steps {
+                script {
+                    def numero1 = 5
+                    def numero2 = 7
+                    def suma = numero1 + numero2
+                    echo "La suma de ${numero1} + ${numero2} = ${suma}"
+                }
+            }
+        }
+
+        stage('Stage 4 - Comandos Shell') {
+            steps {
+                script {
+                    echo "Ejecutando comandos shell..."
+
+                    // Guardar la fecha actual en un archivo
+                    sh 'date > date.txt'
+
+                    // Mostrar uso de disco y guardar resultado en archivo
+                    sh 'df -h > df.txt'
+
+                    // Listar los archivos generados
+                    sh 'ls -l'
+
+                    echo "Stage 4 finalizado"
+                }
+            }
+        }
+    }
+}
